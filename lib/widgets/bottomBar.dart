@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shopx/colors.dart';
 import 'package:shopx/config/size_config.dart';
+import 'package:shopx/screens/favorite_Screen.dart';
 import 'package:shopx/screens/home_Screen.dart';
 import 'package:shopx/style.dart';
 
 class BottomBar extends StatefulWidget {
+  static const routename = '/bottom_screen';
+
   @override
   State<BottomBar> createState() => _BottomBarState();
 }
@@ -20,20 +23,15 @@ class _BottomBarState extends State<BottomBar> {
 
   final tabs = [
     HomeScreen(),
-    Center(
-      child: PrimaryText(
-        text: 'Store Near By ',
-        color: AppColors.primary,
-        size: 20,
-      ),
-    ),
-    Center(
-      child: PrimaryText(
-        text: 'Cart detail Page',
-        color: AppColors.primary,
-        size: 20,
-      ),
-    ),
+    FavoriteScreen(),
+    // LoginScreen(),
+    // Center(
+    //   child: PrimaryText(
+    //     text: 'Cart detail Page',
+    //     color: AppColors.primary,
+    //     size: 20,
+    //   ),
+    // ),
     Center(
       child: PrimaryText(
         text: 'Profile Page',
@@ -107,19 +105,19 @@ class _BottomBarState extends State<BottomBar> {
                           : AppColors.white),
                   child: Row(
                     children: [
-                      SvgPicture.asset(
-                        'assets/location.svg',
-                        width: 20,
+                      Icon(
+                        Icons.favorite,
                         color: currentIndex == 1
                             ? AppColors.primary
                             : AppColors.iconGray,
+                        size: currentIndex == 1 ? 20 : 20,
                       ),
                       SizedBox(
-                        width: 15,
+                        width: 5,
                       ),
                       currentIndex == 1
                           ? PrimaryText(
-                              text: 'Near by',
+                              text: 'Favorites',
                               size: 16,
                               color: AppColors.primary,
                               fontWeight: FontWeight.w700)

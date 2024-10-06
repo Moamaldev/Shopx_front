@@ -63,4 +63,8 @@ class ProductState with ChangeNotifier {
         .where((product) => product.catagory?.id == categoryId)
         .toList();
   }
+
+  List<Product> get favoritesProducts {
+    return _products.where((product) => product.favorit == true).toList();
+  }
 }

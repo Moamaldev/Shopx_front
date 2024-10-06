@@ -7,6 +7,7 @@ import 'package:shopx/screens/all_Product_Screen.dart';
 import 'package:shopx/state/catigory_fetch_state.dart';
 import 'package:shopx/state/product_State.dart';
 import 'package:shopx/style.dart';
+import 'package:shopx/widgets/customDrawer.dart';
 import 'package:shopx/widgets/singel_Product.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _innit = true;
   bool _isLoding = false;
   // bool _isLoding2 = false;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void didChangeDependencies() async {
@@ -56,14 +58,19 @@ class _HomeScreenState extends State<HomeScreen> {
       final productx = Provider.of<ProductState>(context)
           .filterProductsByCategory('${category[selectedCat].id}');
       return Scaffold(
+        key: _scaffoldKey, // Assign the GlobalKey to the Scaffold
+        drawer: CustomDrawer(),
         backgroundColor: AppColors.white,
         appBar: AppBar(
+          automaticallyImplyLeading: false, // يوخر التحكم من الاب بار
           centerTitle: false,
           backgroundColor: Colors.transparent,
           title: Padding(
             padding: const EdgeInsets.only(left: 10.0),
             child: RawMaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                _scaffoldKey.currentState!.openDrawer();
+              },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
               elevation: 2.0,
