@@ -7,11 +7,17 @@ import 'package:shopx/screens/favorite_Screen.dart';
 import 'package:shopx/screens/home_Screen.dart';
 import 'package:shopx/screens/product_DetailScren.dart';
 import 'package:shopx/state/catigory_fetch_state.dart';
+import 'package:shopx/state/dataStore/constant_Var.dart';
+import 'package:shopx/state/dataStore/local_Storge.dart';
 import 'package:shopx/state/product_State.dart';
 import 'package:shopx/state/user_State.dart';
 import 'package:shopx/widgets/bottomBar.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // ميشغل التطبيق قبل ذني
+  await CacheNetwork.cacheInitialization(); // init when app run
+  token = CacheNetwork.getFromCache(key: 'token');
+  print("token is $token");
   runApp(const MyApp());
 }
 
@@ -42,7 +48,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: RigesterScreen(),
+        home: token != null && token != '' ? BottomBar() : RigesterScreen(),
 
         // home: BottomBar(),
       ),

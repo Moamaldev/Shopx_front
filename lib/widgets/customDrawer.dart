@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shopx/colors.dart';
+import 'package:shopx/screens/auth/login_Screen.dart';
 import 'package:shopx/screens/favorite_Screen.dart';
+import 'package:shopx/state/dataStore/local_Storge.dart';
 import 'package:shopx/widgets/bottomBar.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -96,8 +98,13 @@ class CustomDrawer extends StatelessWidget {
                 _buildDrawerItem(
                   icon: Icons.logout,
                   text: 'Logout',
-                  onTap: () {
-                    Navigator.pop(context);
+                  onTap: () async {
+                    await CacheNetwork.deletFromCache(key: 'token');
+                    Navigator.of(context)
+                        .pushReplacementNamed(LoginScreen.routename);
+
+                    // delet token next time muss man wider mal login oder register
+                    //clear ist besser aber habe ich nur 1 str
                     // Implement your logout logic here
                   },
                 ),

@@ -5,6 +5,7 @@ import 'package:shopx/colors.dart';
 import 'package:shopx/screens/auth/rigester_Screen.dart';
 import 'package:shopx/state/user_State.dart';
 import 'package:shopx/style.dart';
+import 'package:shopx/widgets/bottomBar.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routename = '/login_screen';
@@ -23,15 +24,33 @@ class _LoginScreenState extends State<LoginScreen> {
   // final TextEditingController _passwordController = TextEditingController();
   // final TextEditingController _usernameController = TextEditingController();
 
-  void _loginNew() {
+  void _loginNew() async {
     var isvalid = _form.currentState?.validate();
     if (!isvalid!) {
       return;
     }
     _form.currentState!.save();
-    Provider.of<UserState>(context, listen: false)
+    bool istoken = await Provider.of<UserState>(context, listen: false)
         .loginNow(_username, _password);
-    print('username = $_username ,password = $_password ');
+    if (istoken) {
+      Navigator.of(context).pushReplacementNamed(BottomBar.routename);
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Somthing is Wrong Try Again'),
+            actions: [
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('OK'))
+            ],
+          );
+        },
+      );
+    }
   }
 
   @override

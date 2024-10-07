@@ -4,6 +4,7 @@ import 'package:shopx/colors.dart';
 import 'package:shopx/config/size_config.dart';
 import 'package:shopx/screens/favorite_Screen.dart';
 import 'package:shopx/screens/home_Screen.dart';
+import 'package:shopx/state/dataStore/local_Storge.dart';
 import 'package:shopx/style.dart';
 
 class BottomBar extends StatefulWidget {
@@ -25,16 +26,16 @@ class _BottomBarState extends State<BottomBar> {
     HomeScreen(),
     FavoriteScreen(),
     // LoginScreen(),
-    // Center(
-    //   child: PrimaryText(
-    //     text: 'Cart detail Page',
-    //     color: AppColors.primary,
-    //     size: 20,
-    //   ),
-    // ),
     Center(
       child: PrimaryText(
-        text: 'Profile Page',
+        text: 'Cart detail Page',
+        color: AppColors.primary,
+        size: 20,
+      ),
+    ),
+    Center(
+      child: PrimaryText(
+        text: CacheNetwork.getFromCache(key: 'token'),
         color: AppColors.primary,
         size: 20,
       ),

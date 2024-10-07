@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shopx/models/product.dart';
 import 'dart:convert';
+import 'package:shopx/state/dataStore/local_Storge.dart';
 
 class ProductState with ChangeNotifier {
   List<Product> _products = [];
   Future<bool> getProducts() async {
+    var userToken = CacheNetwork.getFromCache(key: 'token');
+
     String url = 'http://10.0.2.2:8000/api/products/';
     try {
       http.Response response = await http.get(Uri.parse(url), headers: {
         "Content-Type": "application/json",
-        'Authorization': "token 8955d97f80311c4cb53601d1ce286fdd8fcc3402"
+        'Authorization': "token $userToken"
       });
       var data = json.decode(response.body) as List;
       // print(data);
@@ -31,13 +34,15 @@ class ProductState with ChangeNotifier {
   }
 
   Future<void> favoritBtn(String? id) async {
+    var userToken = CacheNetwork.getFromCache(key: 'token');
+
     String url = 'http://10.0.2.2:8000/api/favorit/';
     try {
       // ignore: unused_local_variable
       http.Response response = await http.post(Uri.parse(url),
           headers: {
             "Content-Type": "application/json",
-            'Authorization': "token 8955d97f80311c4cb53601d1ce286fdd8fcc3402"
+            'Authorization': "token $userToken"
           },
           body: json.encode({
             'id': id,
