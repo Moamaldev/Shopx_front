@@ -39,7 +39,24 @@ class _LoginScreenState extends State<LoginScreen> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Somthing is Wrong Try Again'),
+            title: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                PrimaryText(
+                  text: 'Somthing is Wrong Try Again',
+                  size: 16,
+                  color: AppColors.primary,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                PrimaryText(
+                  text: 'Check UserName , PassWord',
+                  size: 14,
+                ),
+              ],
+            ),
             actions: [
               ElevatedButton(
                   onPressed: () {

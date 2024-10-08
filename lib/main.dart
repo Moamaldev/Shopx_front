@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: token != null && token != '' ? BottomBar() : RigesterScreen(),
+        home: token != null && token != '' ? BottomBar() : LoginScreen(),
 
         // home: BottomBar(),
       ),

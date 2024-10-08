@@ -30,4 +30,35 @@ class UserState with ChangeNotifier {
       return false;
     }
   }
+
+  Future<bool> registerNew(String fname, String lname, String email,
+      String uname, String pass) async {
+    String url = 'http://10.0.2.2:8000/api/register/';
+    try {
+      http.Response response = await http.post(Uri.parse(url),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: json.encode({
+            'username': uname,
+            'password': pass,
+            'first_name': fname,
+            'last_name': lname,
+            'email': email
+          }));
+      var data = json.decode(response.body) as Map;
+      print(data);
+
+      if (data['error'] == false) {
+        //whene false in server it mean true ohne error
+
+        return true;
+      }
+      print('mit error');
+      return false; //mit error
+    } catch (e) {
+      print('e in registerNew : $e');
+      return false;
+    }
+  }
 }

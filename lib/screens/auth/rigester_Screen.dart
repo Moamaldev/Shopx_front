@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shopx/animation/fade_Animaton.dart';
 import 'package:shopx/colors.dart';
 import 'package:shopx/screens/auth/login_Screen.dart';
+import 'package:shopx/state/user_State.dart';
 import 'package:shopx/style.dart';
 
 class RigesterScreen extends StatefulWidget {
@@ -27,15 +29,84 @@ class _RigesterScreenState extends State<RigesterScreen> {
   // final TextEditingController _passwordController = TextEditingController();
   // final TextEditingController _usernameController = TextEditingController();
 
-  void _loginNew() {
+  void _loginNew() async {
     var isvalid = _form.currentState?.validate();
     if (!isvalid!) {
       return;
     }
     _form.currentState!.save();
-
-    print(
-        'username = $_username ,password = $_password  , email = $_email , first_name = $_first_name , last_name = $_last_name , cof= $_confpassword');
+    bool is_regestierd = await Provider.of<UserState>(context, listen: false)
+        .registerNew(_first_name, _last_name, _email, _username, _password);
+    if (is_regestierd) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                PrimaryText(
+                  text: 'Congratulations',
+                  size: 16,
+                  color: AppColors.primary,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                PrimaryText(
+                  text: 'Welcome to Shopx $_first_name',
+                  size: 14,
+                ),
+              ],
+            ),
+            actions: [
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(LoginScreen.routename);
+                  },
+                  child: Text('Login Now'))
+            ],
+          );
+        },
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                PrimaryText(
+                  text: 'Somthing is Wrong Try Again',
+                  size: 16,
+                  color: AppColors.primary,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                PrimaryText(
+                  text: 'UserName Alredy Exist',
+                  size: 14,
+                ),
+              ],
+            ),
+            actions: [
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('OK'))
+            ],
+          );
+        },
+      );
+    }
+    // print(
+    //     'username = $_username ,password = $_password  , email = $_email , first_name = $_first_name , last_name = $_last_name , cof= $_confpassword');
   }
 
   @override
