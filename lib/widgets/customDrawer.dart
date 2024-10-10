@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shopx/colors.dart';
 import 'package:shopx/screens/auth/login_Screen.dart';
+import 'package:shopx/screens/cart_Screen.dart';
 import 'package:shopx/screens/favorite_Screen.dart';
 import 'package:shopx/state/dataStore/local_Storge.dart';
+import 'package:shopx/state/fetch_Singel_user.dart';
 import 'package:shopx/widgets/bottomBar.dart';
 
 class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<FetchSingelUser>(context).user;
     return Drawer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -32,7 +36,7 @@ class CustomDrawer extends StatelessWidget {
                 )
               ],
             ),
-            child: const Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircleAvatar(
@@ -42,7 +46,7 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'Alex Johnson',
+                  '${user!.firstName}',
                   style: TextStyle(
                     color: AppColors.black,
                     fontSize: 22,
@@ -50,7 +54,7 @@ class CustomDrawer extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'alex.j@example.com',
+                  '${user.email}',
                   style: TextStyle(
                     color: AppColors.black,
                     fontSize: 14,
@@ -92,7 +96,7 @@ class CustomDrawer extends StatelessWidget {
                   icon: Icons.settings,
                   text: 'Settings',
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.of(context).pushNamed(Cart.routename);
                   },
                 ),
                 _buildDrawerItem(

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shopx/colors.dart';
 import 'package:shopx/config/size_config.dart';
+import 'package:shopx/screens/cart_Screen.dart';
 import 'package:shopx/screens/favorite_Screen.dart';
 import 'package:shopx/screens/home_Screen.dart';
-import 'package:shopx/state/dataStore/local_Storge.dart';
+import 'package:shopx/screens/profile.dart';
 import 'package:shopx/style.dart';
 
 class BottomBar extends StatefulWidget {
@@ -26,24 +27,16 @@ class _BottomBarState extends State<BottomBar> {
     HomeScreen(),
     FavoriteScreen(),
     // LoginScreen(),
-    Center(
-      child: PrimaryText(
-        text: 'Cart detail Page',
-        color: AppColors.primary,
-        size: 20,
-      ),
+    Cart(
+      check: true,
     ),
-    Center(
-      child: PrimaryText(
-        text: CacheNetwork.getFromCache(key: 'token'),
-        color: AppColors.primary,
-        size: 20,
-      ),
-    ),
+    UserProfileScreen()
   ];
 
   @override
   Widget build(BuildContext context) {
+    // final username = Provider.of<FetchSingelUser>(context).
+
     SizeConfig().init(context);
     return Scaffold(
       body: IndexedStack(

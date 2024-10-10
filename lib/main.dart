@@ -3,12 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:shopx/screens/all_Product_Screen.dart';
 import 'package:shopx/screens/auth/login_Screen.dart';
 import 'package:shopx/screens/auth/rigester_Screen.dart';
+import 'package:shopx/screens/cart_Screen.dart';
 import 'package:shopx/screens/favorite_Screen.dart';
 import 'package:shopx/screens/home_Screen.dart';
 import 'package:shopx/screens/product_DetailScren.dart';
 import 'package:shopx/state/catigory_fetch_state.dart';
 import 'package:shopx/state/dataStore/constant_Var.dart';
 import 'package:shopx/state/dataStore/local_Storge.dart';
+import 'package:shopx/state/fetch_Singel_user.dart';
 import 'package:shopx/state/product_State.dart';
 import 'package:shopx/state/user_State.dart';
 import 'package:shopx/widgets/bottomBar.dart';
@@ -31,7 +33,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (ctx) => ProductState()),
         ChangeNotifierProvider(create: (ctx) => CatigoryFetchState()),
-        ChangeNotifierProvider(create: (ctx) => UserState())
+        ChangeNotifierProvider(create: (ctx) => UserState()),
+        ChangeNotifierProvider(create: (ctx) => FetchSingelUser())
       ],
       child: MaterialApp(
         routes: {
@@ -42,6 +45,9 @@ class MyApp extends StatelessWidget {
           AllProductScreen.routename: (ctx) => AllProductScreen(),
           FavoriteScreen.routename: (ctx) => FavoriteScreen(),
           BottomBar.routename: (ctx) => BottomBar(),
+          Cart.routename: (ctx) => Cart(
+                check: false,
+              )
         },
         title: 'Shopx',
         debugShowCheckedModeBanner: false,

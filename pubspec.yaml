@@ -42,6 +42,9 @@ dependencies:
   supercharged: ^2.1.1
   localstorage: ^5.0.0
   shared_preferences: ^2.3.2
+  get: ^4.6.6
+  flutter_slidable: ^3.1.1
+  badges: ^3.1.2
 
 dev_dependencies:
   flutter_test:
