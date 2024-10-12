@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
           FavoriteScreen.routename: (ctx) => FavoriteScreen(),
           BottomBar.routename: (ctx) => BottomBar(),
           Cart.routename: (ctx) => Cart(
-                check: false,
+                check: false, // check mean back btn
               )
         },
         title: 'Shopx',

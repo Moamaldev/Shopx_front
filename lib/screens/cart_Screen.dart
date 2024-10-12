@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:shopx/animation/fade_Animaton.dart';
 import 'package:shopx/colors.dart';
 import 'package:shopx/models/product.dart';
+import 'package:shopx/screens/order/order_New.dart';
 import 'package:shopx/state/cart_Getx.dart';
 
 class Cart extends StatefulWidget {
@@ -281,15 +282,12 @@ class _CarttotalState extends State<Carttotal> {
               List<String> x = [];
               for (var i = 0; i < widget.cart.cartItems.length; i++) {
                 x.add(
-                    'pid : ${widget.cart.cartItems.keys.toList()[i].id} qty : ${widget.cart.cartItems.values.toList()[i]} ');
+                    'product-Id : ${widget.cart.cartItems.keys.toList()[i].id} Quantity : ${widget.cart.cartItems.values.toList()[i]} ');
               }
-              // String r = x.map((e) => e.trim()).join('\n');
 
-              // List<String> k = ['pid : vvv qty :1', 'pid : mmm qty :2'];
-
-              // for (String item in k) {
+              // for (String item in x) {
               //   // تقسيم النص بناءً على الفاصلة بين الأجزاء (":")
-              //   List<String> parts = item.split('qty');
+              //   List<String> parts = item.split('Quantity');
               //   String productId =
               //       parts[0].trim(); // "pid : vvv" أو "pid : mmm"
               //   String quantity = parts[1].trim(); // "1" أو "2"
@@ -297,8 +295,14 @@ class _CarttotalState extends State<Carttotal> {
               //   print('Product ID: $productId');
               //   print('Quantity: $quantity');
               // }
+
               // print(x); // all list
-              // print(r); // indeviuael
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (ctx) =>
+                          OrderScreen(total: '${widget.cart.total}', item: x)),
+                  (route) => true);
             },
             child: Container(
               height: h * 0.072,
