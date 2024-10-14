@@ -11,6 +11,7 @@ import 'package:shopx/state/catigory_fetch_state.dart';
 import 'package:shopx/state/dataStore/constant_Var.dart';
 import 'package:shopx/state/dataStore/local_Storge.dart';
 import 'package:shopx/state/fetch_Singel_user.dart';
+import 'package:shopx/state/order_State.dart';
 import 'package:shopx/state/product_State.dart';
 import 'package:shopx/state/user_State.dart';
 import 'package:shopx/widgets/bottomBar.dart';
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => ProductState()),
         ChangeNotifierProvider(create: (ctx) => CatigoryFetchState()),
         ChangeNotifierProvider(create: (ctx) => UserState()),
-        ChangeNotifierProvider(create: (ctx) => FetchSingelUser())
+        ChangeNotifierProvider(create: (ctx) => FetchSingelUser()),
+        ChangeNotifierProvider(create: (ctx) => OrderState())
       ],
       child: MaterialApp(
         routes: {

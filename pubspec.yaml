@@ -45,8 +45,10 @@ dependencies:
   get: ^4.6.6
   flutter_slidable: ^3.1.1
   badges: ^3.1.2
-  flutter_credit_card: ^4.0.1
+  intl: ^0.18.0
 
+
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

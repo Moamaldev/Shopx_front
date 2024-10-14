@@ -282,7 +282,7 @@ class _CarttotalState extends State<Carttotal> {
               List<String> x = [];
               for (var i = 0; i < widget.cart.cartItems.length; i++) {
                 x.add(
-                    'product-Id : ${widget.cart.cartItems.keys.toList()[i].id} Quantity : ${widget.cart.cartItems.values.toList()[i]} ');
+                    '${widget.cart.cartItems.keys.toList()[i].id} Quantity : ${widget.cart.cartItems.values.toList()[i]} ');
               }
 
               // for (String item in x) {
@@ -296,7 +296,7 @@ class _CarttotalState extends State<Carttotal> {
               //   print('Quantity: $quantity');
               // }
 
-              // print(x); // all list
+              print(x); // all list
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(

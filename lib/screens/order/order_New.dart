@@ -5,6 +5,9 @@ import 'package:shopx/colors.dart';
 import 'package:shopx/screens/order/payment_withCard.dart';
 import 'package:shopx/state/cart_Getx.dart';
 import 'package:shopx/state/fetch_Singel_user.dart';
+import 'package:shopx/state/order_State.dart';
+import 'package:shopx/style.dart';
+import 'package:shopx/widgets/bottomBar.dart';
 
 class OrderScreen extends StatefulWidget {
   final String total;
@@ -30,13 +33,98 @@ class _OrderScreenState extends State<OrderScreen> {
       return;
     }
     _form.currentState?.save();
-
-    print(_email);
-    print(_phone);
-    print(_address);
-
     final uid = Provider.of<FetchSingelUser>(context, listen: false).user?.id;
-    print(uid);
+
+    List<Map<String, dynamic>> products = []; // قائمة المنتجات بشكل Map
+
+    for (String item in widget.item) {
+      List<String> parts = item.split('Quantity');
+
+      if (parts.length == 2) {
+        String productIdx = parts[0].trim(); // productId
+        String quantityx = parts[1].trim(); // quantity
+
+        String quantityString = quantityx.split(':').last.trim();
+
+        // print('Product ID: $productIdx');
+        // print('Quantity: $quantityString');
+
+        products.add({
+          "productId": productIdx,
+          "quantity": quantityString,
+        });
+      } else {
+        print('Error: Invalid format for item: $item');
+      }
+    }
+    bool orderDone = await Provider.of<OrderState>(context, listen: false)
+        .newOrder(
+            widget.total, _email, _phone, _address, 'Cash', uid!, products);
+    if (orderDone) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                PrimaryText(
+                  text: 'Congratulations',
+                  size: 16,
+                  color: AppColors.primary,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                // PrimaryText(
+                //   text: 'Welcome to Shopx $_first_name',
+                //   size: 14,
+                // ),
+              ],
+            ),
+            actions: [
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(BottomBar.routename);
+                    cartx.clear();
+                  },
+                  child: Text('Done'))
+            ],
+          );
+        },
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                PrimaryText(
+                  text: 'Somthing is Wrong Try Again',
+                  size: 16,
+                  color: AppColors.primary,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
+            actions: [
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('OK'))
+            ],
+          );
+        },
+      );
+    }
 
     // bool order = await Provider.of<OrderState>(context, listen: false).orderNow(
     //     address: _address,
@@ -201,6 +289,23 @@ class _OrderScreenState extends State<OrderScreen> {
                         // make order
                         onPressed: () {
                           ordernew();
+
+// طباعة قائمة المنتجات للتأكد من تنسيقها
+
+// إنشاء كائن order
+//                           order orderx = order(
+//                             productsList:
+//                                 products, // تأكد من أن productsList يقبل List<Map<String, dynamic>>
+//                             total: widget.total,
+//                             email: _email,
+//                             phone: _phone,
+//                             address: _address,
+//                             paymentMethod: "cash",
+//                             user: uidt,
+//                           );
+
+// // طباعة بيانات الطلب في تنسيق JSON
+//                           print('Order JSON: ${jsonEncode(orderx.toJson())}');
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
