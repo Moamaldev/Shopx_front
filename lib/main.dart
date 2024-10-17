@@ -6,6 +6,7 @@ import 'package:shopx/screens/auth/rigester_Screen.dart';
 import 'package:shopx/screens/cart_Screen.dart';
 import 'package:shopx/screens/favorite_Screen.dart';
 import 'package:shopx/screens/home_Screen.dart';
+import 'package:shopx/screens/order/order_History.dart';
 import 'package:shopx/screens/product_DetailScren.dart';
 import 'package:shopx/state/catigory_fetch_state.dart';
 import 'package:shopx/state/dataStore/constant_Var.dart';
@@ -49,7 +50,8 @@ class MyApp extends StatelessWidget {
           BottomBar.routename: (ctx) => BottomBar(),
           Cart.routename: (ctx) => Cart(
                 check: false, // check mean back btn
-              )
+              ),
+          OrderHistory.routename: (ctx) => OrderHistory(),
         },
         title: 'Shopx',
         debugShowCheckedModeBanner: false,

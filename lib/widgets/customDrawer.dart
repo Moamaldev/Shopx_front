@@ -4,6 +4,7 @@ import 'package:shopx/colors.dart';
 import 'package:shopx/screens/auth/login_Screen.dart';
 import 'package:shopx/screens/cart_Screen.dart';
 import 'package:shopx/screens/favorite_Screen.dart';
+import 'package:shopx/screens/order/order_History.dart';
 import 'package:shopx/state/dataStore/local_Storge.dart';
 import 'package:shopx/state/fetch_Singel_user.dart';
 import 'package:shopx/widgets/bottomBar.dart';
@@ -85,10 +86,11 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
                 _buildDrawerItem(
-                  icon: Icons.notifications,
-                  text: 'Notifications',
+                  icon: Icons.history_sharp,
+                  text: 'Order History',
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.of(context)
+                        .pushReplacementNamed(OrderHistory.routename);
                   },
                 ),
                 Divider(),

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:shopx/colors.dart';
+import 'package:shopx/screens/order/order_History.dart';
 import 'package:shopx/screens/order/payment_withCard.dart';
 import 'package:shopx/state/cart_Getx.dart';
 import 'package:shopx/state/fetch_Singel_user.dart';
 import 'package:shopx/state/order_State.dart';
 import 'package:shopx/style.dart';
-import 'package:shopx/widgets/bottomBar.dart';
 
 class OrderScreen extends StatefulWidget {
   final String total;
@@ -60,6 +60,8 @@ class _OrderScreenState extends State<OrderScreen> {
     bool orderDone = await Provider.of<OrderState>(context, listen: false)
         .newOrder(
             widget.total, _email, _phone, _address, 'Cash', uid!, products);
+
+    //order fertig
     if (orderDone) {
       showDialog(
         context: context,
@@ -70,7 +72,7 @@ class _OrderScreenState extends State<OrderScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PrimaryText(
-                  text: 'Congratulations',
+                  text: 'Congratulations Your Order is Done',
                   size: 16,
                   color: AppColors.primary,
                 ),
@@ -87,10 +89,10 @@ class _OrderScreenState extends State<OrderScreen> {
               ElevatedButton(
                   onPressed: () {
                     Navigator.of(context)
-                        .pushReplacementNamed(BottomBar.routename);
+                        .pushReplacementNamed(OrderHistory.routename);
                     cartx.clear();
                   },
-                  child: Text('Done'))
+                  child: Text('Go To Order History'))
             ],
           );
         },

@@ -3,11 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:shopx/colors.dart';
+import 'package:shopx/screens/order/order_History.dart';
 import 'package:shopx/state/cart_Getx.dart';
 import 'package:shopx/state/fetch_Singel_user.dart';
 import 'package:shopx/state/order_State.dart';
 import 'package:shopx/style.dart';
-import 'package:shopx/widgets/bottomBar.dart'; // إضافة المكتبة
 
 class PaymentWithcard extends StatefulWidget {
   final String total;
@@ -107,6 +107,7 @@ class _PaymentWithcardState extends State<PaymentWithcard> {
     bool orderDone = await Provider.of<OrderState>(context, listen: false)
         .newOrder(widget.total, _email, _phone, _address, 'CridetCard', uid!,
             products);
+    //order fertig
     if (orderDone) {
       showDialog(
         context: context,
@@ -117,7 +118,7 @@ class _PaymentWithcardState extends State<PaymentWithcard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PrimaryText(
-                  text: 'Congratulations',
+                  text: 'Congratulations Your Payment is Done',
                   size: 16,
                   color: AppColors.primary,
                 ),
@@ -134,10 +135,10 @@ class _PaymentWithcardState extends State<PaymentWithcard> {
               ElevatedButton(
                   onPressed: () {
                     Navigator.of(context)
-                        .pushReplacementNamed(BottomBar.routename);
+                        .pushReplacementNamed(OrderHistory.routename);
                     cartx.clear();
                   },
-                  child: Text('Done'))
+                  child: Text('Go To Order History'))
             ],
           );
         },

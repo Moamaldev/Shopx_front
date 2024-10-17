@@ -51,12 +51,14 @@ class Cartx extends GetxController {
       .map((product) => product.key.sellingPrice * product.value)
       .toList();
 
-  get total => _product.entries
-      .map((product) => product.key.sellingPrice * product.value)
-      .toList()
-      .reduce((value, element) => value + element)
-      .toStringAsFixed(2);
-
+  get total => _product.entries.isNotEmpty
+      ? _product.entries
+          .map((product) => product.key.sellingPrice * product.value)
+          .toList()
+          .reduce((value, element) => value + element)
+          .toStringAsFixed(2)
+      : '0.00';
+//StateError (Bad state: No element) resolve done
   void clear() {
     _product.clear();
   }
