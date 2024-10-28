@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:shopx/colors.dart';
 import 'package:shopx/config/size_config.dart';
+import 'package:shopx/screens/Review/review_Screen.dart';
 import 'package:shopx/screens/cart_Screen.dart';
 import 'package:shopx/state/cart_Getx.dart';
 import 'package:shopx/style.dart';
@@ -210,7 +211,13 @@ class ProductDetailScreen extends StatelessWidget {
                         ),
                         //***** kommentare btn **** */
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(
+                                ReviewScreen.routename,
+                                arguments: id);
+                            // Navigator.of(context)
+                            //     .pushReplacementNamed(ReviewScreen.routename);
+                          },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.primaryLight,
                               shape: RoundedRectangleBorder(

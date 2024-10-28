@@ -95,8 +95,8 @@ class CustomDrawer extends StatelessWidget {
                 ),
                 Divider(),
                 _buildDrawerItem(
-                  icon: Icons.settings,
-                  text: 'Settings',
+                  icon: Icons.shopping_cart,
+                  text: 'Shopping Cart',
                   onTap: () {
                     Navigator.of(context).pushNamed(Cart.routename);
                   },

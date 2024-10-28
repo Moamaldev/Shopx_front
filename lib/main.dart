@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopx/screens/Review/create_review.dart';
+import 'package:shopx/screens/Review/review_Screen.dart';
 import 'package:shopx/screens/all_Product_Screen.dart';
 import 'package:shopx/screens/auth/login_Screen.dart';
 import 'package:shopx/screens/auth/rigester_Screen.dart';
@@ -14,6 +16,7 @@ import 'package:shopx/state/dataStore/local_Storge.dart';
 import 'package:shopx/state/fetch_Singel_user.dart';
 import 'package:shopx/state/order_State.dart';
 import 'package:shopx/state/product_State.dart';
+import 'package:shopx/state/review_State.dart';
 import 'package:shopx/state/user_State.dart';
 import 'package:shopx/widgets/bottomBar.dart';
 
@@ -37,7 +40,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => CatigoryFetchState()),
         ChangeNotifierProvider(create: (ctx) => UserState()),
         ChangeNotifierProvider(create: (ctx) => FetchSingelUser()),
-        ChangeNotifierProvider(create: (ctx) => OrderState())
+        ChangeNotifierProvider(create: (ctx) => OrderState()),
+        ChangeNotifierProvider(create: (ctx) => ReviewState()),
       ],
       child: MaterialApp(
         routes: {
@@ -52,6 +56,8 @@ class MyApp extends StatelessWidget {
                 check: false, // check mean back btn
               ),
           OrderHistory.routename: (ctx) => OrderHistory(),
+          ReviewScreen.routename: (ctx) => ReviewScreen(),
+          CreateReview.routename: (ctx) => CreateReview()
         },
         title: 'Shopx',
         debugShowCheckedModeBanner: false,
