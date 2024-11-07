@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shopx/colors.dart';
 import 'package:shopx/screens/auth/login_Screen.dart';
+import 'package:shopx/state/dataStore/constant_Var.dart';
+import 'package:shopx/widgets/bottomBar.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routename = '/splash-screen';
@@ -18,9 +20,13 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    // الانتقال إلى الصفحة الرئيسية بعد 3 ثوانٍ
     Future.delayed(Duration(seconds: 6), () {
-      Navigator.pushReplacementNamed(context, LoginScreen.routename);
+      Navigator.pushReplacementNamed(
+        context,
+        token != null && token != ''
+            ? BottomBar.routename
+            : LoginScreen.routename,
+      );
     });
   }
 
