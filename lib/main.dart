@@ -5,6 +5,7 @@ import 'package:shopx/screens/Review/review_Screen.dart';
 import 'package:shopx/screens/all_Product_Screen.dart';
 import 'package:shopx/screens/auth/login_Screen.dart';
 import 'package:shopx/screens/auth/rigester_Screen.dart';
+import 'package:shopx/screens/auth/splash_Screen.dart';
 import 'package:shopx/screens/cart_Screen.dart';
 import 'package:shopx/screens/favorite_Screen.dart';
 import 'package:shopx/screens/home_Screen.dart';
@@ -57,14 +58,15 @@ class MyApp extends StatelessWidget {
               ),
           OrderHistory.routename: (ctx) => OrderHistory(),
           ReviewScreen.routename: (ctx) => ReviewScreen(),
-          CreateReview.routename: (ctx) => CreateReview()
+          CreateReview.routename: (ctx) => CreateReview(),
+          SplashScreen.routename: (ctx) => SplashScreen()
         },
         title: 'Shopx',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: token != null && token != '' ? BottomBar() : LoginScreen(),
+        home: token != null && token != '' ? BottomBar() : SplashScreen(),
 
         // home: BottomBar(),
       ),
